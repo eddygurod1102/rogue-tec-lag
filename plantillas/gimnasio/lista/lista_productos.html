@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    {% if user.is_authenticated and user.is_staff %}
+        <a href="{% url 'agregar_producto' categoria.pk subcategoria.pk %}" class="btn btn-success mt-3">+ Agregar producto</a>
+    {% endif %}
+    <div class="container d-flex flex-column mt-3 align-items-center">
+        {% for producto in productos %}
+            <div class="card productos mb-3">
+                <div class="d-flex">
+                    <a href="{% url 'detalle_producto' categoria.pk subcategoria.pk producto.pk %}">
+                        <img src="{{ producto.fotografia.url }}" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text text-center">{{ producto }}</p>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <h3>${{ producto.precio }} MXN</h3>
+                        <p class="card-text">Disponibles: {{ producto.stock }}</p>
+                    </div>
+                </div>
+                {% if user.is_authenticated and user.is_staff %}
+                    <div class="card-footer d-flex justify-content-center">
+                            <a href="{% url 'editar_producto' categoria.pk subcategoria.pk producto.pk %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'eliminar_producto' categoria.pk subcategoria.pk producto.pk %}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock contenido %}

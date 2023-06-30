@@ -1,0 +1,56 @@
+{% load gimnasio_extra %}
+{% load sales_extra %}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RogueTecLag</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+        <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a href="{% url 'inicio' %}" class="navbar-brand">RogueTecLag</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                        <div class="navbar-nav justify-content-start">
+                            {% categorias %}
+                        </div>
+                        {% if user.is_authenticated %}
+                            <div class="dropdown me-2">
+                                <a href="#" class="dropdown-toggle show text-decoration-none" data-bs-toggle="dropdown" aria-expanded="true">
+                                    {{ user.username }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    {% carrito user %}
+                                    <li><a href="{% url 'cambiar_contrasena' %}" class="dropdown-item">Cambiar contrase&ntilde;a</a></li>
+                                    <li><a href="{% url 'logout' %}" class="dropdown-item">Cerrar sesi&oacute;n</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div>
+                                <a href="{% url 'login' %}" class="text-decoration-none">Iniciar sesi&oacute;n</a> |
+                                <a href="{% url 'signin' %}" class="text-decoration-none">Registrarse</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            {% block contenido %}
+            {% endblock contenido %}
+        </main>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load mathfilters %}
+{% load sales_extra %}
+
+{% block contenido %}
+<div class="container mt-3">
+    {% if carrito.listaproducto_set.count == 0 %}
+        <div class="alert alert-info text-center">
+            No tienes productos en tu carrito
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in carrito.listaproducto_set.all %}
+                        <tr>
+                            <td>
+                                <img src="{{ producto.producto.fotografia.url }}" width="100" height="100">
+                                {{ producto.producto }}
+                            </td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>${{ producto.producto.precio|mul:producto.cantidad }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2" class="text-center">Total:</td>
+                        <td>${% total carrito %}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'compra' carrito.pk %}" class="btn btn-success">Comprar</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock contenido %}

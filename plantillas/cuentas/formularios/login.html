@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="container mt-3">
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Iniciar sesión" class="btn btn-primary">
+    </form>
+    <a href="{% url 'resetear_contrasena' %}" class="mt-3">¿Olvidaste tu contrase&ntilde;a?</a>
+</div>
+{% endblock contenido %}

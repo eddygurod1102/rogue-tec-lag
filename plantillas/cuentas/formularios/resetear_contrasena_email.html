@@ -1,0 +1,9 @@
+<h1>Hola, {{ user }}.</h1>
+<p>
+    Hemos recibido una petici&oacute;n tuya para resetear tu contrase&ntilde;a.
+    <br>
+    Por favor, entra a {{ protocol }}://{{ domain }}{% url 'resetear_contrasena_confirmar' uidb64=uid token=token %}
+    para que puedas resetear tu contrase&ntilde;a.
+    <br><br>
+    Si no fuiste t&uacute;, puedes ignorar este correo.
+</p>

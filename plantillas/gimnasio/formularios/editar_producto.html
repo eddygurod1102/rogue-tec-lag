@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="container mt-3 mb-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Editar producto" class="btn btn-primary">
+    </form>
+</div>
+{% endblock contenido %}

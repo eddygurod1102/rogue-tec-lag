@@ -1,0 +1,3 @@
+{% for categoria in categorias %}
+<a href="{% url 'lista_subcategorias' categoria.pk%}" class="nav-link active">{{ categoria }}</a>
+{% endfor %}

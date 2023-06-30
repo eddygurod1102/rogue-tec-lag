@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="container mt-3">
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Resetear contraseña" class="btn btn-primary">
+    </form>
+</div>
+{% endblock contenido %}

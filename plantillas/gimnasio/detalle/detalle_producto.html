@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="container mt-3">
+    <div class="card detalle mb-3">
+        <div class="d-flex">
+            <img src="{{ producto.fotografia.url }}" class="card-img-top">
+            <div class="card-body">
+                <h2 class="card-text text-center">{{ producto }}</h2>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <h3>${{ producto.precio }} MXN</h3>
+                <p class="card-text">Disponibles: {{ producto.stock }}</p>
+                <br>
+                {% if producto.stock == 0 %}
+                    <div class="alert alert-danger">
+                        No hay stock disponible de este producto. No sabemos si lo habr&aacute; en un futuro.
+                    </div>
+                {% else %}
+                    <div class="container">
+                        <form action="{% url 'agregar_carrito' producto.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="cantidad" id="" class="form-control w-25 mb-3">
+                            <input type="submit" value="Agregar al carrito" class="btn btn-primary">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <h4>Rese&ntilde;as({{ producto.comentario_set.count }})</h4>
+    {% for comentario in producto.comentario_set.all %}
+        <div class="card comentario">
+            <div class="card-body">
+                <p class="card-text fw-bold">{{ comentario.usuario }}</p>
+                <p class="card-text">{{ comentario }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+    <h4>Agregar reseña</h4>
+    {% if user.is_authenticated %}
+        <form action="" method="post" class="mb-3">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="Agregar reseña" class="btn btn-primary">
+        </form>
+    {% else %}
+        <p>Debes iniciar sesi&oacute;n para poder publicar una rese&ntilde;a</p>
+    {% endif %}
+</div>
+{% endblock contenido %}

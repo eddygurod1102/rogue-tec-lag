@@ -1,0 +1,32 @@
+/* Archivo CSS para tener un poco de control sobre bootstrap5 */
+div[class="card"] {
+    width: 18rem;
+}
+
+div[class="card-body"] p[class="card-text"] {
+    width: 466px;
+}
+
+div[class="card productos mb-3"], div[class="card carrito mb-3"] {
+    width: 50rem;
+}
+
+div[class="card productos mb-3"] img[class="card-img-top"],
+div[class="card carrito mb-3"] img[class="card-img-top"] {
+    width: 18.75rem;
+    height: 18.75rem;
+}
+
+div[class="card detalle mb-3"], div[class="card comentario"] {
+    width: 70rem;
+}
+
+div[class="card detalle mb-3"] img[class="card-img-top"] {
+    width: 500px;
+    height: 500px;
+}
+
+/* div[class="card carrito mb-3"] img[class="card-img-top"] {
+    width: 18.75rempx;
+    height: 18.75rempx;    
+} */
